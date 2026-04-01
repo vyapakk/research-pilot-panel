@@ -27,7 +27,6 @@ export interface AdminUser {
   industries: string[];
   signupDate: string;
   signupTime: string;
-  status: "active" | "inactive" | "suspended";
   lastLogin: string | null;
   accessGrants: UserAccess[];
 }
