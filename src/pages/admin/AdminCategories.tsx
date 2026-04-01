@@ -281,12 +281,10 @@ const AdminCategories = () => {
 
             <div className="grid grid-cols-2 gap-4">
               <div className="space-y-2">
-                <Label className="text-xs font-medium">ID *</Label>
+                <Label className="text-xs font-medium">ID</Label>
                 <Input
-                  placeholder="e.g. aerospace-defense"
                   value={formId}
-                  onChange={(e) => setFormId(e.target.value)}
-                  disabled={!!editingCategory}
+                  disabled
                 />
               </div>
               <div className="space-y-2">
