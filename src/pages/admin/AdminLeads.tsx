@@ -131,6 +131,7 @@ const AdminLeads = () => {
             <SelectItem value="all">All Types</SelectItem>
             <SelectItem value="access_request">Access Requests</SelectItem>
             <SelectItem value="subscription_inquiry">Subscription Inquiries</SelectItem>
+            <SelectItem value="enquiry">Enquiries</SelectItem>
           </SelectContent>
         </Select>
       </div>
