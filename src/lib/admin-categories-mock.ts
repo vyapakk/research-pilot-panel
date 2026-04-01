@@ -11,27 +11,9 @@ export interface AdminCategory {
 
 // BACKEND INTEGRATION POINT: GET /api/admin/categories
 export const mockCategories: AdminCategory[] = [
-  {
-    id: "composites",
-    name: "Composites",
-    slug: "composites",
-    icon: "layers",
-    color: "teal",
-  },
-  {
-    id: "aerospace-defense",
-    name: "Aerospace & Defense",
-    slug: "aerospace-defense",
-    icon: "plane",
-    color: "navy",
-  },
-  {
-    id: "automotive",
-    name: "Automotive & Transportation",
-    slug: "automotive-transportation",
-    icon: "car",
-    color: "amber",
-  },
+  { id: "1", name: "Composites", slug: "composites", icon: "layers", color: "teal" },
+  { id: "2", name: "Aerospace & Defense", slug: "aerospace-defense", icon: "plane", color: "navy" },
+  { id: "3", name: "Automotive & Transportation", slug: "automotive-transportation", icon: "car", color: "amber" },
 ];
 
 export const availableColors = [
