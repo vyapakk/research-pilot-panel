@@ -1,7 +1,7 @@
 import { Users, CreditCard, BarChart3, TrendingUp } from "lucide-react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
-import { Button } from "@/components/ui/button";
+
 import StatCard from "@/components/admin/StatCard";
 import { mockStats, mockRecentSignups, mockPopularDashboards } from "@/lib/admin-mock-data";
 
