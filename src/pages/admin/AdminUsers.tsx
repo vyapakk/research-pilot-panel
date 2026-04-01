@@ -342,6 +342,14 @@ const AdminUsers = () => {
         user={selectedUser}
         onClose={() => setSelectedUser(null)}
         onUserUpdate={handleUserUpdate}
+        onUserDelete={handleUserDelete}
+      />
+
+      {/* Create User Dialog */}
+      <CreateUserDialog
+        open={showCreateDialog}
+        onClose={() => setShowCreateDialog(false)}
+        onUserCreated={handleUserCreated}
       />
     </div>
   );
