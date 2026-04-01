@@ -33,6 +33,7 @@ const formatDateTime = (iso: string) => {
 const typeLabel: Record<LeadType, string> = {
   access_request: "Access Request",
   subscription_inquiry: "Subscription Inquiry",
+  enquiry: "Enquiry",
 };
 
 const AdminLeads = () => {
@@ -57,7 +58,9 @@ const AdminLeads = () => {
           l.phone.includes(q) ||
           l.designation.toLowerCase().includes(q) ||
           (l.datasetName?.toLowerCase().includes(q)) ||
-          (l.dashboardName?.toLowerCase().includes(q))
+          (l.dashboardName?.toLowerCase().includes(q)) ||
+          (l.queryDashboard?.toLowerCase().includes(q)) ||
+          (l.queryText?.toLowerCase().includes(q))
       );
     }
     return result;
@@ -67,7 +70,7 @@ const AdminLeads = () => {
   const paginated = filtered.slice((currentPage - 1) * ITEMS_PER_PAGE, currentPage * ITEMS_PER_PAGE);
 
   const handleExportCSV = () => {
-    const headers = ["ID", "Type", "Name", "Email", "Phone", "Company", "Designation", "Dataset/Dashboard", "Message", "Submitted At"];
+    const headers = ["ID", "Type", "Name", "Email", "Phone", "Company", "Designation", "Dataset/Dashboard", "Message/Query", "Submitted At"];
     const rows = filtered.map((l) => [
       l.id,
       typeLabel[l.type],
@@ -76,8 +79,8 @@ const AdminLeads = () => {
       l.phone,
       l.company,
       l.designation,
-      l.datasetName || l.dashboardName || "",
-      l.message || "",
+      l.datasetName || l.dashboardName || l.queryDashboard || "",
+      l.message || l.queryText || "",
       formatDateTime(l.submittedAt),
     ]);
     const csv = [headers, ...rows].map((r) => r.map((v) => `"${String(v).replace(/"/g, '""')}"`).join(",")).join("\n");
@@ -128,6 +131,7 @@ const AdminLeads = () => {
             <SelectItem value="all">All Types</SelectItem>
             <SelectItem value="access_request">Access Requests</SelectItem>
             <SelectItem value="subscription_inquiry">Subscription Inquiries</SelectItem>
+            <SelectItem value="enquiry">Enquiries</SelectItem>
           </SelectContent>
         </Select>
       </div>
@@ -168,18 +172,21 @@ const AdminLeads = () => {
                     </div>
                   </TableCell>
                   <TableCell>
-                    <Badge variant={lead.type === "access_request" ? "default" : "secondary"}
-                      className={lead.type === "access_request" ? "text-xs" : "text-xs"}
-                      style={lead.type === "access_request"
-                        ? { backgroundColor: "#0d5a5a", color: "#fff" }
-                        : { backgroundColor: "#1b426315", color: "#1b4263" }
+                    <Badge
+                      className="text-xs"
+                      style={
+                        lead.type === "access_request"
+                          ? { backgroundColor: "#0d5a5a", color: "#fff" }
+                          : lead.type === "enquiry"
+                          ? { backgroundColor: "#d97706", color: "#fff" }
+                          : { backgroundColor: "#1b426315", color: "#1b4263" }
                       }
                     >
                       {typeLabel[lead.type]}
                     </Badge>
                   </TableCell>
                   <TableCell className="text-sm max-w-[200px] truncate">
-                    {lead.datasetName || lead.dashboardName || "—"}
+                    {lead.datasetName || lead.dashboardName || lead.queryDashboard || "—"}
                   </TableCell>
                   <TableCell className="text-sm text-muted-foreground">
                     {formatDate(lead.submittedAt)}
@@ -234,9 +241,12 @@ const AdminLeads = () => {
               </SheetHeader>
               <div className="mt-6 space-y-5">
                 <Badge
-                  style={selectedLead.type === "access_request"
-                    ? { backgroundColor: "#0d5a5a", color: "#fff" }
-                    : { backgroundColor: "#1b426315", color: "#1b4263" }
+                  style={
+                    selectedLead.type === "access_request"
+                      ? { backgroundColor: "#0d5a5a", color: "#fff" }
+                      : selectedLead.type === "enquiry"
+                      ? { backgroundColor: "#d97706", color: "#fff" }
+                      : { backgroundColor: "#1b426315", color: "#1b4263" }
                   }
                 >
                   {typeLabel[selectedLead.type]}
@@ -262,6 +272,20 @@ const AdminLeads = () => {
                         <div>
                           <p className="text-xs font-medium text-muted-foreground mb-1">Message</p>
                           <p className="text-sm bg-muted/30 rounded-lg p-3">{selectedLead.message}</p>
+                        </div>
+                      )}
+                    </>
+                  )}
+
+                  {selectedLead.type === "enquiry" && (
+                    <>
+                      {selectedLead.queryDashboard && (
+                        <DetailRow label="Dashboard" value={selectedLead.queryDashboard} />
+                      )}
+                      {selectedLead.queryText && (
+                        <div>
+                          <p className="text-xs font-medium text-muted-foreground mb-1">Query</p>
+                          <p className="text-sm bg-muted/30 rounded-lg p-3">{selectedLead.queryText}</p>
                         </div>
                       )}
                     </>
