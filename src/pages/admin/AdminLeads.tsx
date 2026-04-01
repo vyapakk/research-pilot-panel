@@ -172,18 +172,21 @@ const AdminLeads = () => {
                     </div>
                   </TableCell>
                   <TableCell>
-                    <Badge variant={lead.type === "access_request" ? "default" : "secondary"}
-                      className={lead.type === "access_request" ? "text-xs" : "text-xs"}
-                      style={lead.type === "access_request"
-                        ? { backgroundColor: "#0d5a5a", color: "#fff" }
-                        : { backgroundColor: "#1b426315", color: "#1b4263" }
+                    <Badge
+                      className="text-xs"
+                      style={
+                        lead.type === "access_request"
+                          ? { backgroundColor: "#0d5a5a", color: "#fff" }
+                          : lead.type === "enquiry"
+                          ? { backgroundColor: "#d97706", color: "#fff" }
+                          : { backgroundColor: "#1b426315", color: "#1b4263" }
                       }
                     >
                       {typeLabel[lead.type]}
                     </Badge>
                   </TableCell>
                   <TableCell className="text-sm max-w-[200px] truncate">
-                    {lead.datasetName || lead.dashboardName || "—"}
+                    {lead.datasetName || lead.dashboardName || lead.queryDashboard || "—"}
                   </TableCell>
                   <TableCell className="text-sm text-muted-foreground">
                     {formatDate(lead.submittedAt)}
