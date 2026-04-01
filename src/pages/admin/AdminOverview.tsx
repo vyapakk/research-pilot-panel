@@ -51,7 +51,7 @@ const AdminOverview = () => {
 
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
         {/* Recent Signups */}
-        {/* BACKEND INTEGRATION POINT: GET /api/admin/recent-signups?limit=10 */}
+        {/* BACKEND INTEGRATION POINT: GET /api/admin/recent-signups?limit=20 */}
         <Card className="lg:col-span-2 border-none shadow-md">
           <CardHeader className="pb-3">
             <div className="flex items-center justify-between">
