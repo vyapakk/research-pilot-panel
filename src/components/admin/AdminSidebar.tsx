@@ -3,7 +3,6 @@ import {
   Users,
   CreditCard,
   BarChart3,
-  MessageSquare,
   LogOut,
 } from "lucide-react";
 import { NavLink } from "@/components/NavLink";
