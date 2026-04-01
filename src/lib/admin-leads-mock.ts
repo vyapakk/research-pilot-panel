@@ -1,6 +1,6 @@
 // BACKEND INTEGRATION POINT: Replace all mock data with API calls to your PHP Yii2 backend.
 
-export type LeadType = "access_request" | "subscription_inquiry";
+export type LeadType = "access_request" | "subscription_inquiry" | "enquiry";
 
 export interface AdminLead {
   id: string;
@@ -15,6 +15,9 @@ export interface AdminLead {
   // Subscription Inquiry specific
   dashboardName?: string;
   message?: string;
+  // Enquiry specific
+  queryText?: string;
+  queryDashboard?: string;
   submittedAt: string; // ISO date string
 }
 
