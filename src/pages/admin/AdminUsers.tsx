@@ -1,8 +1,9 @@
 import { useState, useMemo } from "react";
-import { Search, Download, Filter, ChevronDown, X } from "lucide-react";
+import { Search, Download, Filter, ChevronDown, X, UserPlus } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
+import CreateUserDialog from "@/components/admin/CreateUserDialog";
 import { Card, CardContent } from "@/components/ui/card";
 import {
   Select,
@@ -57,6 +58,7 @@ const AdminUsers = () => {
   const [filtersOpen, setFiltersOpen] = useState(false);
   const [selectedUser, setSelectedUser] = useState<AdminUser | null>(null);
   const [users, setUsers] = useState<AdminUser[]>(mockUsers);
+  const [showCreateDialog, setShowCreateDialog] = useState(false);
 
   // BACKEND INTEGRATION POINT: GET /api/admin/users?search=&status=&industry=
   const filteredUsers = useMemo(() => {
@@ -131,6 +133,15 @@ const AdminUsers = () => {
     setSelectedUser(updatedUser);
   };
 
+  const handleUserDelete = (userId: number) => {
+    setUsers((prev) => prev.filter((u) => u.id !== userId));
+    setSelectedUser(null);
+  };
+
+  const handleUserCreated = (newUser: AdminUser) => {
+    setUsers((prev) => [newUser, ...prev]);
+  };
+
   return (
     <div className="space-y-6 max-w-[1400px] mx-auto" style={{ fontFamily: "'Poppins', sans-serif" }}>
       {/* Header */}
@@ -143,14 +154,24 @@ const AdminUsers = () => {
             {filteredUsers.length} of {users.length} users
           </p>
         </div>
-        <Button
-          onClick={handleExportCSV}
-          variant="outline"
-          className="gap-2 shrink-0"
-        >
-          <Download className="h-4 w-4" />
-          Export CSV
-        </Button>
+        <div className="flex gap-3">
+          <Button
+            onClick={() => setShowCreateDialog(true)}
+            className="gap-2 shrink-0"
+            style={{ backgroundColor: "#1b4263" }}
+          >
+            <UserPlus className="h-4 w-4" />
+            Create User
+          </Button>
+          <Button
+            onClick={handleExportCSV}
+            variant="outline"
+            className="gap-2 shrink-0"
+          >
+            <Download className="h-4 w-4" />
+            Export CSV
+          </Button>
+        </div>
       </div>
 
       {/* Search + Filters */}
@@ -321,6 +342,14 @@ const AdminUsers = () => {
         user={selectedUser}
         onClose={() => setSelectedUser(null)}
         onUserUpdate={handleUserUpdate}
+        onUserDelete={handleUserDelete}
+      />
+
+      {/* Create User Dialog */}
+      <CreateUserDialog
+        open={showCreateDialog}
+        onClose={() => setShowCreateDialog(false)}
+        onUserCreated={handleUserCreated}
       />
     </div>
   );
