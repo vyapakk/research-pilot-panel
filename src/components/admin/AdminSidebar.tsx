@@ -1,6 +1,7 @@
 import {
   LayoutDashboard,
   Users,
+  FolderTree,
   CreditCard,
   BarChart3,
   LogOut,
