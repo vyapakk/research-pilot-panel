@@ -154,14 +154,24 @@ const AdminUsers = () => {
             {filteredUsers.length} of {users.length} users
           </p>
         </div>
-        <Button
-          onClick={handleExportCSV}
-          variant="outline"
-          className="gap-2 shrink-0"
-        >
-          <Download className="h-4 w-4" />
-          Export CSV
-        </Button>
+        <div className="flex gap-3">
+          <Button
+            onClick={() => setShowCreateDialog(true)}
+            className="gap-2 shrink-0"
+            style={{ backgroundColor: "#1b4263" }}
+          >
+            <UserPlus className="h-4 w-4" />
+            Create User
+          </Button>
+          <Button
+            onClick={handleExportCSV}
+            variant="outline"
+            className="gap-2 shrink-0"
+          >
+            <Download className="h-4 w-4" />
+            Export CSV
+          </Button>
+        </div>
       </div>
 
       {/* Search + Filters */}
