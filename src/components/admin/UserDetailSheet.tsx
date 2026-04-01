@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useMemo } from "react";
 import {
   Sheet,
   SheetContent,
@@ -19,6 +19,17 @@ import {
 } from "@/components/ui/select";
 import { Separator } from "@/components/ui/separator";
 import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+  AlertDialogTrigger,
+} from "@/components/ui/alert-dialog";
+import {
   Mail,
   Phone,
   Building2,
@@ -28,7 +39,7 @@ import {
   Shield,
   Plus,
   Trash2,
-  ChevronDown,
+  Search,
 } from "lucide-react";
 import { type AdminUser, type UserAccess, mockCatalog } from "@/lib/admin-users-mock";
 import { toast } from "sonner";
@@ -37,6 +48,7 @@ interface UserDetailSheetProps {
   user: AdminUser | null;
   onClose: () => void;
   onUserUpdate: (user: AdminUser) => void;
+  onUserDelete: (userId: number) => void;
 }
 
 const statusColors: Record<string, string> = {
@@ -47,13 +59,15 @@ const statusColors: Record<string, string> = {
   revoked: "bg-red-100 text-red-600",
 };
 
-const UserDetailSheet = ({ user, onClose, onUserUpdate }: UserDetailSheetProps) => {
+const UserDetailSheet = ({ user, onClose, onUserUpdate, onUserDelete }: UserDetailSheetProps) => {
   const [showGrantForm, setShowGrantForm] = useState(false);
   const [grantType, setGrantType] = useState<"dashboard" | "dataset">("dashboard");
   const [selectedCategory, setSelectedCategory] = useState("");
   const [selectedDataset, setSelectedDataset] = useState("");
   const [selectedDashboard, setSelectedDashboard] = useState("");
   const [validUntil, setValidUntil] = useState("");
+  const [datasetSearch, setDatasetSearch] = useState("");
+  const [dashboardSearch, setDashboardSearch] = useState("");
 
   if (!user) return null;
 
@@ -61,9 +75,17 @@ const UserDetailSheet = ({ user, onClose, onUserUpdate }: UserDetailSheetProps) 
     ? mockCatalog.find((c) => c.categoryId === selectedCategory)?.datasets || []
     : [];
 
+  const filteredDatasets = datasetSearch
+    ? availableDatasets.filter((d) => d.datasetName.toLowerCase().includes(datasetSearch.toLowerCase()))
+    : availableDatasets;
+
   const availableDashboards = selectedDataset
     ? availableDatasets.find((d) => d.datasetId === selectedDataset)?.dashboards || []
     : [];
+
+  const filteredDashboards = dashboardSearch
+    ? availableDashboards.filter((d) => d.name.toLowerCase().includes(dashboardSearch.toLowerCase()))
+    : availableDashboards;
 
   const resetGrantForm = () => {
     setShowGrantForm(false);
@@ -72,6 +94,8 @@ const UserDetailSheet = ({ user, onClose, onUserUpdate }: UserDetailSheetProps) 
     setSelectedDataset("");
     setSelectedDashboard("");
     setValidUntil("");
+    setDatasetSearch("");
+    setDashboardSearch("");
   };
 
   // BACKEND INTEGRATION POINT: POST /api/admin/users/{userId}/access
@@ -126,6 +150,12 @@ const UserDetailSheet = ({ user, onClose, onUserUpdate }: UserDetailSheetProps) 
     toast.success("Access revoked");
   };
 
+  // BACKEND INTEGRATION POINT: DELETE /api/admin/users/{userId}
+  const handleDeleteUser = () => {
+    onUserDelete(user.id);
+    toast.success(`User "${user.name}" has been deleted`);
+  };
+
   const activeGrants = user.accessGrants.filter((a) => a.status === "active");
   const inactiveGrants = user.accessGrants.filter((a) => a.status !== "active");
 
@@ -150,7 +180,7 @@ const UserDetailSheet = ({ user, onClose, onUserUpdate }: UserDetailSheetProps) 
             >
               {user.name.split(" ").map((n) => n[0]).join("")}
             </div>
-            <div className="min-w-0">
+            <div className="min-w-0 flex-1">
               <SheetHeader className="text-left space-y-0 p-0">
                 <SheetTitle className="text-white text-xl font-bold">
                   {user.name}
@@ -159,12 +189,33 @@ const UserDetailSheet = ({ user, onClose, onUserUpdate }: UserDetailSheetProps) 
                   {user.designation} at {user.company}
                 </SheetDescription>
               </SheetHeader>
-              <div className="mt-2">
+              <div className="mt-2 flex items-center gap-2">
                 <Badge className={`text-xs capitalize ${statusColors[user.status]}`}>
                   {user.status}
                 </Badge>
               </div>
             </div>
+            <AlertDialog>
+              <AlertDialogTrigger asChild>
+                <Button variant="ghost" size="sm" className="text-white/60 hover:text-white hover:bg-white/10 shrink-0">
+                  <Trash2 className="h-4 w-4" />
+                </Button>
+              </AlertDialogTrigger>
+              <AlertDialogContent>
+                <AlertDialogHeader>
+                  <AlertDialogTitle>Delete User</AlertDialogTitle>
+                  <AlertDialogDescription>
+                    Are you sure you want to delete <strong>{user.name}</strong>? This action cannot be undone. All access grants will also be removed.
+                  </AlertDialogDescription>
+                </AlertDialogHeader>
+                <AlertDialogFooter>
+                  <AlertDialogCancel>Cancel</AlertDialogCancel>
+                  <AlertDialogAction onClick={handleDeleteUser} className="bg-destructive text-destructive-foreground hover:bg-destructive/90">
+                    Delete User
+                  </AlertDialogAction>
+                </AlertDialogFooter>
+              </AlertDialogContent>
+            </AlertDialog>
           </div>
         </div>
 
@@ -293,6 +344,8 @@ const UserDetailSheet = ({ user, onClose, onUserUpdate }: UserDetailSheetProps) 
                     setSelectedCategory(v);
                     setSelectedDataset("");
                     setSelectedDashboard("");
+                    setDatasetSearch("");
+                    setDashboardSearch("");
                   }}>
                     <SelectTrigger>
                       <SelectValue placeholder="Select category" />
@@ -313,16 +366,34 @@ const UserDetailSheet = ({ user, onClose, onUserUpdate }: UserDetailSheetProps) 
                     <Select value={selectedDataset} onValueChange={(v) => {
                       setSelectedDataset(v);
                       setSelectedDashboard("");
+                      setDashboardSearch("");
                     }}>
                       <SelectTrigger>
                         <SelectValue placeholder="Select dataset" />
                       </SelectTrigger>
                       <SelectContent>
-                        {availableDatasets.map((ds) => (
-                          <SelectItem key={ds.datasetId} value={ds.datasetId}>
-                            {ds.datasetName}
-                          </SelectItem>
-                        ))}
+                        <div className="px-2 pb-2">
+                          <div className="relative">
+                            <Search className="absolute left-2 top-1/2 -translate-y-1/2 h-3 w-3 text-muted-foreground" />
+                            <Input
+                              placeholder="Search datasets..."
+                              value={datasetSearch}
+                              onChange={(e) => setDatasetSearch(e.target.value)}
+                              className="h-8 pl-7 text-xs"
+                              onClick={(e) => e.stopPropagation()}
+                              onKeyDown={(e) => e.stopPropagation()}
+                            />
+                          </div>
+                        </div>
+                        {filteredDatasets.length === 0 ? (
+                          <p className="text-xs text-muted-foreground text-center py-2">No datasets found</p>
+                        ) : (
+                          filteredDatasets.map((ds) => (
+                            <SelectItem key={ds.datasetId} value={ds.datasetId}>
+                              {ds.datasetName}
+                            </SelectItem>
+                          ))
+                        )}
                       </SelectContent>
                     </Select>
                   </div>
@@ -336,11 +407,28 @@ const UserDetailSheet = ({ user, onClose, onUserUpdate }: UserDetailSheetProps) 
                         <SelectValue placeholder="Select dashboard" />
                       </SelectTrigger>
                       <SelectContent>
-                        {availableDashboards.map((db) => (
-                          <SelectItem key={db.id} value={db.id}>
-                            {db.name}
-                          </SelectItem>
-                        ))}
+                        <div className="px-2 pb-2">
+                          <div className="relative">
+                            <Search className="absolute left-2 top-1/2 -translate-y-1/2 h-3 w-3 text-muted-foreground" />
+                            <Input
+                              placeholder="Search dashboards..."
+                              value={dashboardSearch}
+                              onChange={(e) => setDashboardSearch(e.target.value)}
+                              className="h-8 pl-7 text-xs"
+                              onClick={(e) => e.stopPropagation()}
+                              onKeyDown={(e) => e.stopPropagation()}
+                            />
+                          </div>
+                        </div>
+                        {filteredDashboards.length === 0 ? (
+                          <p className="text-xs text-muted-foreground text-center py-2">No dashboards found</p>
+                        ) : (
+                          filteredDashboards.map((db) => (
+                            <SelectItem key={db.id} value={db.id}>
+                              {db.name}
+                            </SelectItem>
+                          ))
+                        )}
                       </SelectContent>
                     </Select>
                   </div>
