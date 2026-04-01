@@ -1,6 +1,7 @@
 import {
   LayoutDashboard,
   Users,
+  FolderTree,
   CreditCard,
   BarChart3,
   LogOut,
@@ -23,6 +24,7 @@ import {
 const mainNav = [
   { title: "Overview", url: "/admin", icon: LayoutDashboard },
   { title: "Users", url: "/admin/users", icon: Users },
+  { title: "Categories", url: "/admin/categories", icon: FolderTree },
 ];
 
 const futureNav = [
