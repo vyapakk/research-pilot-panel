@@ -31,6 +31,7 @@ const App = () => (
             }
           >
             <Route index element={<AdminOverview />} />
+            <Route path="users" element={<AdminUsers />} />
           </Route>
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
