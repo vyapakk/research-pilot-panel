@@ -14,6 +14,9 @@ import {
   AlertDialogTitle, AlertDialogTrigger,
 } from "@/components/ui/alert-dialog";
 import { Plus, Trash2, Search, BarChart3 } from "lucide-react";
+import {
+  Select, SelectContent, SelectItem, SelectTrigger, SelectValue,
+} from "@/components/ui/select";
 import { toast } from "sonner";
 import { type AdminDashboard, mockDashboards } from "@/lib/admin-dashboards-mock";
 import { mockDatasets } from "@/lib/admin-datasets-mock";
