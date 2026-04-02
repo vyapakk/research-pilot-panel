@@ -115,6 +115,10 @@ const AdminNotifications = () => {
         return mockUsers.filter((u) =>
           u.accessGrants.some((a) => selectedCategories.includes(a.categoryName))
         ).length;
+      case "dataset":
+        return mockUsers.filter((u) =>
+          u.accessGrants.some((a) => selectedDatasets.includes(a.datasetName))
+        ).length;
       default:
         return 0;
     }
