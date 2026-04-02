@@ -369,101 +369,103 @@ const UserDetailSheet = ({ user, onClose, onUserUpdate, onUserDelete }: UserDeta
                 )}
 
                 {grantType !== "master" && (
-                <div className="space-y-2">
-                  <Label className="text-xs">Category</Label>
-                  <Select value={selectedCategory} onValueChange={(v) => {
-                    setSelectedCategory(v);
-                    setSelectedDataset("");
-                    setSelectedDashboard("");
-                    setDatasetSearch("");
-                    setDashboardSearch("");
-                  }}>
-                    <SelectTrigger>
-                      <SelectValue placeholder="Select category" />
-                    </SelectTrigger>
-                    <SelectContent>
-                      {mockCatalog.map((cat) => (
-                        <SelectItem key={cat.categoryId} value={cat.categoryId}>
-                          {cat.categoryName}
-                        </SelectItem>
-                      ))}
-                    </SelectContent>
-                  </Select>
-                </div>
-
-                {selectedCategory && (
-                  <div className="space-y-2">
-                    <Label className="text-xs">Dataset</Label>
-                    <Select value={selectedDataset} onValueChange={(v) => {
-                      setSelectedDataset(v);
-                      setSelectedDashboard("");
-                      setDashboardSearch("");
-                    }}>
-                      <SelectTrigger>
-                        <SelectValue placeholder="Select dataset" />
-                      </SelectTrigger>
-                      <SelectContent>
-                        <div className="px-2 pb-2">
-                          <div className="relative">
-                            <Search className="absolute left-2 top-1/2 -translate-y-1/2 h-3 w-3 text-muted-foreground" />
-                            <Input
-                              placeholder="Search datasets..."
-                              value={datasetSearch}
-                              onChange={(e) => setDatasetSearch(e.target.value)}
-                              className="h-8 pl-7 text-xs"
-                              onClick={(e) => e.stopPropagation()}
-                              onKeyDown={(e) => e.stopPropagation()}
-                            />
-                          </div>
-                        </div>
-                        {filteredDatasets.length === 0 ? (
-                          <p className="text-xs text-muted-foreground text-center py-2">No datasets found</p>
-                        ) : (
-                          filteredDatasets.map((ds) => (
-                            <SelectItem key={ds.datasetId} value={ds.datasetId}>
-                              {ds.datasetName}
+                  <>
+                    <div className="space-y-2">
+                      <Label className="text-xs">Category</Label>
+                      <Select value={selectedCategory} onValueChange={(v) => {
+                        setSelectedCategory(v);
+                        setSelectedDataset("");
+                        setSelectedDashboard("");
+                        setDatasetSearch("");
+                        setDashboardSearch("");
+                      }}>
+                        <SelectTrigger>
+                          <SelectValue placeholder="Select category" />
+                        </SelectTrigger>
+                        <SelectContent>
+                          {mockCatalog.map((cat) => (
+                            <SelectItem key={cat.categoryId} value={cat.categoryId}>
+                              {cat.categoryName}
                             </SelectItem>
-                          ))
-                        )}
-                      </SelectContent>
-                    </Select>
-                  </div>
-                )}
+                          ))}
+                        </SelectContent>
+                      </Select>
+                    </div>
 
-                {grantType === "dashboard" && selectedDataset && (
-                  <div className="space-y-2">
-                    <Label className="text-xs">Dashboard</Label>
-                    <Select value={selectedDashboard} onValueChange={setSelectedDashboard}>
-                      <SelectTrigger>
-                        <SelectValue placeholder="Select dashboard" />
-                      </SelectTrigger>
-                      <SelectContent>
-                        <div className="px-2 pb-2">
-                          <div className="relative">
-                            <Search className="absolute left-2 top-1/2 -translate-y-1/2 h-3 w-3 text-muted-foreground" />
-                            <Input
-                              placeholder="Search dashboards..."
-                              value={dashboardSearch}
-                              onChange={(e) => setDashboardSearch(e.target.value)}
-                              className="h-8 pl-7 text-xs"
-                              onClick={(e) => e.stopPropagation()}
-                              onKeyDown={(e) => e.stopPropagation()}
-                            />
-                          </div>
-                        </div>
-                        {filteredDashboards.length === 0 ? (
-                          <p className="text-xs text-muted-foreground text-center py-2">No dashboards found</p>
-                        ) : (
-                          filteredDashboards.map((db) => (
-                            <SelectItem key={db.id} value={db.id}>
-                              {db.name}
-                            </SelectItem>
-                          ))
-                        )}
-                      </SelectContent>
-                    </Select>
-                  </div>
-                )}
+                    {selectedCategory && (
+                      <div className="space-y-2">
+                        <Label className="text-xs">Dataset</Label>
+                        <Select value={selectedDataset} onValueChange={(v) => {
+                          setSelectedDataset(v);
+                          setSelectedDashboard("");
+                          setDashboardSearch("");
+                        }}>
+                          <SelectTrigger>
+                            <SelectValue placeholder="Select dataset" />
+                          </SelectTrigger>
+                          <SelectContent>
+                            <div className="px-2 pb-2">
+                              <div className="relative">
+                                <Search className="absolute left-2 top-1/2 -translate-y-1/2 h-3 w-3 text-muted-foreground" />
+                                <Input
+                                  placeholder="Search datasets..."
+                                  value={datasetSearch}
+                                  onChange={(e) => setDatasetSearch(e.target.value)}
+                                  className="h-8 pl-7 text-xs"
+                                  onClick={(e) => e.stopPropagation()}
+                                  onKeyDown={(e) => e.stopPropagation()}
+                                />
+                              </div>
+                            </div>
+                            {filteredDatasets.length === 0 ? (
+                              <p className="text-xs text-muted-foreground text-center py-2">No datasets found</p>
+                            ) : (
+                              filteredDatasets.map((ds) => (
+                                <SelectItem key={ds.datasetId} value={ds.datasetId}>
+                                  {ds.datasetName}
+                                </SelectItem>
+                              ))
+                            )}
+                          </SelectContent>
+                        </Select>
+                      </div>
+                    )}
+
+                    {grantType === "dashboard" && selectedDataset && (
+                      <div className="space-y-2">
+                        <Label className="text-xs">Dashboard</Label>
+                        <Select value={selectedDashboard} onValueChange={setSelectedDashboard}>
+                          <SelectTrigger>
+                            <SelectValue placeholder="Select dashboard" />
+                          </SelectTrigger>
+                          <SelectContent>
+                            <div className="px-2 pb-2">
+                              <div className="relative">
+                                <Search className="absolute left-2 top-1/2 -translate-y-1/2 h-3 w-3 text-muted-foreground" />
+                                <Input
+                                  placeholder="Search dashboards..."
+                                  value={dashboardSearch}
+                                  onChange={(e) => setDashboardSearch(e.target.value)}
+                                  className="h-8 pl-7 text-xs"
+                                  onClick={(e) => e.stopPropagation()}
+                                  onKeyDown={(e) => e.stopPropagation()}
+                                />
+                              </div>
+                            </div>
+                            {filteredDashboards.length === 0 ? (
+                              <p className="text-xs text-muted-foreground text-center py-2">No dashboards found</p>
+                            ) : (
+                              filteredDashboards.map((db) => (
+                                <SelectItem key={db.id} value={db.id}>
+                                  {db.name}
+                                </SelectItem>
+                              ))
+                            )}
+                          </SelectContent>
+                        </Select>
+                      </div>
+                    )}
+                  </>
                 )}
 
                 <div className="space-y-2">
