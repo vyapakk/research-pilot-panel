@@ -55,9 +55,10 @@ const AdminOverview = () => {
           icon={Database}
         />
         <StatCard
-          title="Form Submissions (30d)"
+          title="Form Submissions"
           value={mockStats.formSubmissions30d}
           icon={FileText}
+          trend="Last 30 days"
         />
         <StatCard
           title="Active Users Now"
