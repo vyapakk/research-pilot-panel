@@ -61,7 +61,7 @@ const statusColors: Record<string, string> = {
 
 const UserDetailSheet = ({ user, onClose, onUserUpdate, onUserDelete }: UserDetailSheetProps) => {
   const [showGrantForm, setShowGrantForm] = useState(false);
-  const [grantType, setGrantType] = useState<"dashboard" | "dataset">("dashboard");
+  const [grantType, setGrantType] = useState<"dashboard" | "dataset" | "master">("dashboard");
   const [selectedCategory, setSelectedCategory] = useState("");
   const [selectedDataset, setSelectedDataset] = useState("");
   const [selectedDashboard, setSelectedDashboard] = useState("");
