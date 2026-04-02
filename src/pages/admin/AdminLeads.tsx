@@ -64,6 +64,10 @@ const AdminLeads = () => {
     if (typeFilter !== "all") {
       result = result.filter((l) => l.type === typeFilter);
     }
+    if (statusFilter !== "all") {
+      const isResolved = statusFilter === "resolved";
+      result = result.filter((l) => l.resolved === isResolved);
+    }
     if (search.trim()) {
       const q = search.toLowerCase();
       result = result.filter(
