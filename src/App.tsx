@@ -41,6 +41,7 @@ const App = () => (
             <Route path="leads" element={<AdminLeads />} />
             <Route path="management" element={<AdminManagement />} />
             <Route path="notifications" element={<AdminNotifications />} />
+            <Route path="datasets" element={<AdminDatasets />} />
           </Route>
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
