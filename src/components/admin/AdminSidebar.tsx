@@ -7,7 +7,6 @@ import {
   Shield,
   Bell,
   Database,
-  LogOut,
   BarChart3,
   LogOut,
 } from "lucide-react";
