@@ -127,10 +127,39 @@ const AdminLeads = () => {
             {filtered.length} lead{filtered.length !== 1 ? "s" : ""} from form submissions
           </p>
         </div>
-        <Button onClick={handleExportCSV} variant="outline" className="gap-2" style={{ borderColor: "#1b4263", color: "#1b4263" }}>
-          <Download className="h-4 w-4" />
-          Export CSV
-        </Button>
+        <div className="flex flex-wrap items-center gap-2">
+          <Popover>
+            <PopoverTrigger asChild>
+              <Button variant="outline" className={cn("w-[160px] justify-start text-left font-normal", !exportFrom && "text-muted-foreground")} style={{ borderColor: "#1b4263" }}>
+                <CalendarIcon className="mr-2 h-4 w-4" />
+                {exportFrom ? format(exportFrom, "MMM d, yyyy") : "From date"}
+              </Button>
+            </PopoverTrigger>
+            <PopoverContent className="w-auto p-0" align="start">
+              <Calendar mode="single" selected={exportFrom} onSelect={setExportFrom} initialFocus className={cn("p-3 pointer-events-auto")} />
+            </PopoverContent>
+          </Popover>
+          <Popover>
+            <PopoverTrigger asChild>
+              <Button variant="outline" className={cn("w-[160px] justify-start text-left font-normal", !exportTo && "text-muted-foreground")} style={{ borderColor: "#1b4263" }}>
+                <CalendarIcon className="mr-2 h-4 w-4" />
+                {exportTo ? format(exportTo, "MMM d, yyyy") : "To date"}
+              </Button>
+            </PopoverTrigger>
+            <PopoverContent className="w-auto p-0" align="start">
+              <Calendar mode="single" selected={exportTo} onSelect={setExportTo} initialFocus className={cn("p-3 pointer-events-auto")} />
+            </PopoverContent>
+          </Popover>
+          {(exportFrom || exportTo) && (
+            <Button variant="ghost" size="sm" onClick={() => { setExportFrom(undefined); setExportTo(undefined); }}>
+              Clear
+            </Button>
+          )}
+          <Button onClick={handleExportCSV} variant="outline" className="gap-2" style={{ borderColor: "#1b4263", color: "#1b4263" }}>
+            <Download className="h-4 w-4" />
+            Export CSV
+          </Button>
+        </div>
       </div>
 
       {/* Filters */}
