@@ -502,18 +502,20 @@ const UserDetailSheet = ({ user, onClose, onUserUpdate, onUserDelete }: UserDeta
                           variant="secondary"
                           className="text-[10px] capitalize"
                           style={{
-                            backgroundColor: access.type === "dataset" ? "rgba(79,201,171,0.15)" : "rgba(27,66,99,0.1)",
-                            color: access.type === "dataset" ? "#0d5a5a" : "#1b4263",
+                            backgroundColor: access.type === "master" ? "rgba(79,201,171,0.25)" : access.type === "dataset" ? "rgba(79,201,171,0.15)" : "rgba(27,66,99,0.1)",
+                            color: access.type === "master" ? "#0d5a5a" : access.type === "dataset" ? "#0d5a5a" : "#1b4263",
                           }}
                         >
-                          {access.type}
+                          {access.type === "master" ? "Master" : access.type}
                         </Badge>
-                        <span className="text-xs text-muted-foreground">
-                          {access.categoryName}
-                        </span>
+                        {access.type !== "master" && (
+                          <span className="text-xs text-muted-foreground">
+                            {access.categoryName}
+                          </span>
+                        )}
                       </div>
                       <p className="text-sm font-medium mt-1">
-                        {access.type === "dashboard" ? access.dashboardName : access.datasetName}
+                        {access.type === "master" ? "All Datasets & Dashboards" : access.type === "dashboard" ? access.dashboardName : access.datasetName}
                       </p>
                       {access.type === "dashboard" && (
                         <p className="text-xs text-muted-foreground">{access.datasetName}</p>
