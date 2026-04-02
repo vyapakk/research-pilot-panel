@@ -33,6 +33,7 @@ export const mockLeads: AdminLead[] = [
     company: "AeroCorp Industries",
     designation: "VP Engineering",
     datasetName: "Global Composites Market Analysis 2025",
+    resolved: false,
     submittedAt: "2025-03-28T14:32:00Z",
   },
   {
@@ -45,6 +46,7 @@ export const mockLeads: AdminLead[] = [
     designation: "Director – Strategy",
     dashboardName: "Aerospace & Defense Dashboard",
     message: "Looking for 5-user license for 12 months. Need access to full dataset + quarterly updates.",
+    resolved: true,
     submittedAt: "2025-03-27T09:15:00Z",
   },
   {
@@ -56,6 +58,7 @@ export const mockLeads: AdminLead[] = [
     company: "Boeing Commercial",
     designation: "Senior Analyst",
     datasetName: "Carbon Fiber Reinforced Polymers Market",
+    resolved: false,
     submittedAt: "2025-03-26T16:45:00Z",
   },
   {
@@ -68,6 +71,7 @@ export const mockLeads: AdminLead[] = [
     designation: "Market Research Lead",
     dashboardName: "Automotive Composites Dashboard",
     message: "Interested in a trial subscription for the automotive composites module.",
+    resolved: true,
     submittedAt: "2025-03-25T11:20:00Z",
   },
   {
@@ -79,6 +83,7 @@ export const mockLeads: AdminLead[] = [
     company: "COMAC Group",
     designation: "Technical Manager",
     datasetName: "Glass Fiber Market Outlook 2030",
+    resolved: false,
     submittedAt: "2025-03-24T08:00:00Z",
   },
   {
@@ -90,6 +95,7 @@ export const mockLeads: AdminLead[] = [
     company: "Airbus SE",
     designation: "Procurement Manager",
     datasetName: "Wind Energy Composites Market",
+    resolved: true,
     submittedAt: "2025-03-23T13:10:00Z",
   },
   {
@@ -102,6 +108,7 @@ export const mockLeads: AdminLead[] = [
     designation: "Research Director",
     dashboardName: "EV Battery Materials Dashboard",
     message: "Need enterprise access for our R&D team of 15 members.",
+    resolved: false,
     submittedAt: "2025-03-22T10:30:00Z",
   },
   {
@@ -113,6 +120,7 @@ export const mockLeads: AdminLead[] = [
     company: "Lockheed Martin",
     designation: "Business Development",
     datasetName: "Advanced Ceramics Market Report",
+    resolved: false,
     submittedAt: "2025-03-21T15:45:00Z",
   },
   {
@@ -125,6 +133,7 @@ export const mockLeads: AdminLead[] = [
     designation: "Senior Research Analyst",
     queryDashboard: "Automotive Composites Dashboard",
     queryText: "Can you provide a breakdown of carbon fiber usage in EV body panels vs traditional ICE vehicles for the 2024-2030 forecast period?",
+    resolved: false,
     submittedAt: "2025-03-20T12:15:00Z",
   },
   {
@@ -137,6 +146,7 @@ export const mockLeads: AdminLead[] = [
     designation: "Innovation Manager",
     queryDashboard: "Composites Market Overview",
     queryText: "Looking for data on thermoplastic composites adoption rate in aerospace. Is this covered in the current dataset?",
+    resolved: true,
     submittedAt: "2025-03-19T09:30:00Z",
   },
 ];
