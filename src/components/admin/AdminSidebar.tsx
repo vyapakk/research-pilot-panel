@@ -82,7 +82,7 @@ const AdminSidebar = () => {
             <SidebarMenu>
               <SidebarMenuItem>
                 <SidebarMenuButton asChild>
-                  <NavLink to="/admin" end className="hover:bg-muted/50" activeClassName="font-medium" style={{ color: "#1b4263" }}>
+                  <NavLink to="/admin" end className="hover:bg-muted/50 rounded-md" activeClassName="font-semibold bg-[#1b4263]/10 text-[#1b4263] border-l-[3px] border-[#1b4263]" style={{ color: "#1b4263" }}>
                     <LayoutDashboard className="mr-2 h-4 w-4" />
                     {!collapsed && <span>Overview</span>}
                   </NavLink>
@@ -104,7 +104,7 @@ const AdminSidebar = () => {
                 {group.items.map((item) => (
                   <SidebarMenuItem key={item.title}>
                     <SidebarMenuButton asChild>
-                      <NavLink to={item.url} end className="hover:bg-muted/50" activeClassName="font-medium" style={{ color: "#1b4263" }}>
+                      <NavLink to={item.url} end className="hover:bg-muted/50 rounded-md" activeClassName="font-semibold bg-[#1b4263]/10 text-[#1b4263] border-l-[3px] border-[#1b4263]" style={{ color: "#1b4263" }}>
                         <item.icon className="mr-2 h-4 w-4" />
                         {!collapsed && <span>{item.title}</span>}
                       </NavLink>
