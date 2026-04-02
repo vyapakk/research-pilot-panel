@@ -51,6 +51,7 @@ const AdminLeads = () => {
   const [leads, setLeads] = useState<AdminLead[]>(mockLeads);
   const [search, setSearch] = useState("");
   const [typeFilter, setTypeFilter] = useState<string>("all");
+  const [statusFilter, setStatusFilter] = useState<string>("all");
   const [currentPage, setCurrentPage] = useState(1);
   const [selectedLead, setSelectedLead] = useState<AdminLead | null>(null);
   const [exportFrom, setExportFrom] = useState<Date | undefined>();
@@ -62,6 +63,10 @@ const AdminLeads = () => {
     let result = leads;
     if (typeFilter !== "all") {
       result = result.filter((l) => l.type === typeFilter);
+    }
+    if (statusFilter !== "all") {
+      const isResolved = statusFilter === "resolved";
+      result = result.filter((l) => l.resolved === isResolved);
     }
     if (search.trim()) {
       const q = search.toLowerCase();
@@ -87,7 +92,7 @@ const AdminLeads = () => {
       result = result.filter((l) => new Date(l.submittedAt) <= toEnd);
     }
     return result;
-  }, [leads, search, typeFilter, exportFrom, exportTo]);
+  }, [leads, search, typeFilter, statusFilter, exportFrom, exportTo]);
 
   const totalPages = Math.ceil(filtered.length / ITEMS_PER_PAGE);
   const paginated = filtered.slice((currentPage - 1) * ITEMS_PER_PAGE, currentPage * ITEMS_PER_PAGE);
@@ -242,6 +247,16 @@ const AdminLeads = () => {
             <SelectItem value="access_request">Access Requests</SelectItem>
             <SelectItem value="subscription_inquiry">Subscription Inquiries</SelectItem>
             <SelectItem value="enquiry">Query Form</SelectItem>
+          </SelectContent>
+        </Select>
+        <Select value={statusFilter} onValueChange={(v) => { setStatusFilter(v); setCurrentPage(1); }}>
+          <SelectTrigger className="w-[180px]">
+            <SelectValue placeholder="All Status" />
+          </SelectTrigger>
+          <SelectContent>
+            <SelectItem value="all">All Status</SelectItem>
+            <SelectItem value="resolved">Resolved</SelectItem>
+            <SelectItem value="unresolved">Unresolved</SelectItem>
           </SelectContent>
         </Select>
       </div>
