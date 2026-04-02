@@ -34,11 +34,11 @@ const mainNav = [
   { title: "Admin Management", url: "/admin/management", icon: Shield },
   { title: "Notifications", url: "/admin/notifications", icon: Bell },
   { title: "Datasets", url: "/admin/datasets", icon: Database },
+  { title: "Dashboards", url: "/admin/dashboards", icon: BarChart3 },
 ];
 
 const futureNav = [
   { title: "Subscriptions", url: "#", icon: CreditCard },
-  { title: "Dashboards", url: "#", icon: BarChart3 },
 ];
 
 const AdminSidebar = () => {
