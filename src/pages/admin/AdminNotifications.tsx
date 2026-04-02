@@ -136,6 +136,8 @@ const AdminNotifications = () => {
         return selectedCompanies.join(", ");
       case "access":
         return selectedCategories.join(", ");
+      case "dataset":
+        return selectedDatasets.join(", ");
       default:
         return "";
     }
