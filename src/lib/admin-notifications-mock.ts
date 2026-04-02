@@ -182,3 +182,14 @@ export const categoryOptions = [
   "Aerospace & Defense",
   "Automotive & Transportation",
 ];
+
+// Dataset options for dataset-based targeting
+export const datasetOptions = [
+  "Carbon Fiber Market",
+  "Glass Fiber Composites",
+  "Polymer Matrix Composites",
+  "Aircraft Interiors",
+  "Commercial Aircraft",
+  "Defense Systems",
+  "Electric Vehicle Market",
+];
