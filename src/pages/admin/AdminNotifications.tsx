@@ -258,6 +258,7 @@ const AdminNotifications = () => {
                     setSelectedIndustries([]);
                     setSelectedCompanies([]);
                     setSelectedCategories([]);
+                    setSelectedDatasets([]);
                   }}
                 >
                   <SelectTrigger>
