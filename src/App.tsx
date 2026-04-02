@@ -12,6 +12,7 @@ import AdminCategories from "./pages/admin/AdminCategories.tsx";
 import AdminLeads from "./pages/admin/AdminLeads.tsx";
 import AdminManagement from "./pages/admin/AdminManagement.tsx";
 import AdminNotifications from "./pages/admin/AdminNotifications.tsx";
+import AdminDatasets from "./pages/admin/AdminDatasets.tsx";
 import AdminLayout from "./components/admin/AdminLayout.tsx";
 import AdminAuthGuard from "./components/admin/AdminAuthGuard.tsx";
 
@@ -40,6 +41,7 @@ const App = () => (
             <Route path="leads" element={<AdminLeads />} />
             <Route path="management" element={<AdminManagement />} />
             <Route path="notifications" element={<AdminNotifications />} />
+            <Route path="datasets" element={<AdminDatasets />} />
           </Route>
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />

@@ -6,6 +6,7 @@ import {
   FileText,
   Shield,
   Bell,
+  Database,
   CreditCard,
   BarChart3,
   LogOut,
@@ -32,6 +33,7 @@ const mainNav = [
   { title: "Leads", url: "/admin/leads", icon: FileText },
   { title: "Admin Management", url: "/admin/management", icon: Shield },
   { title: "Notifications", url: "/admin/notifications", icon: Bell },
+  { title: "Datasets", url: "/admin/datasets", icon: Database },
 ];
 
 const futureNav = [
