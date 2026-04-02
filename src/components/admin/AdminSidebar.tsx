@@ -5,6 +5,7 @@ import {
   FolderTree,
   FileText,
   Shield,
+  Bell,
   CreditCard,
   BarChart3,
   LogOut,
@@ -30,6 +31,7 @@ const mainNav = [
   { title: "Categories", url: "/admin/categories", icon: FolderTree },
   { title: "Leads", url: "/admin/leads", icon: FileText },
   { title: "Admin Management", url: "/admin/management", icon: Shield },
+  { title: "Notifications", url: "/admin/notifications", icon: Bell },
 ];
 
 const futureNav = [
