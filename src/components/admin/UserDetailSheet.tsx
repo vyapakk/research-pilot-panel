@@ -100,6 +100,32 @@ const UserDetailSheet = ({ user, onClose, onUserUpdate, onUserDelete }: UserDeta
 
   // BACKEND INTEGRATION POINT: POST /api/admin/users/{userId}/access
   const handleGrantAccess = () => {
+    if (grantType === "master") {
+      if (!validUntil) {
+        toast.error("Please select a validity date");
+        return;
+      }
+      const newAccess: UserAccess = {
+        id: `a-${Date.now()}`,
+        type: "master",
+        categoryId: "",
+        categoryName: "",
+        datasetId: "",
+        datasetName: "",
+        grantedDate: new Date().toISOString().slice(0, 10),
+        validUntil,
+        status: "active",
+      };
+      const updatedUser = {
+        ...user,
+        accessGrants: [...user.accessGrants, newAccess],
+      };
+      onUserUpdate(updatedUser);
+      resetGrantForm();
+      toast.success("Master access granted — user can access all datasets & dashboards");
+      return;
+    }
+
     if (!selectedCategory || !selectedDataset || !validUntil) {
       toast.error("Please fill all required fields");
       return;
