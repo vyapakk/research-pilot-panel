@@ -276,22 +276,13 @@ const AdminCategories = () => {
               />
             </div>
 
-            <div className="grid grid-cols-2 gap-4">
-              <div className="space-y-2">
-                <Label className="text-xs font-medium">ID</Label>
-                <Input
-                  value={formId}
-                  disabled
-                />
-              </div>
-              <div className="space-y-2">
-                <Label className="text-xs font-medium">Slug *</Label>
-                <Input
-                  placeholder="e.g. aerospace-defense"
-                  value={formSlug}
-                  onChange={(e) => setFormSlug(e.target.value)}
-                />
-              </div>
+            <div className="space-y-2">
+              <Label className="text-xs font-medium">Slug *</Label>
+              <Input
+                placeholder="e.g. aerospace-defense"
+                value={formSlug}
+                onChange={(e) => setFormSlug(e.target.value)}
+              />
             </div>
 
             <div className="grid grid-cols-2 gap-4">

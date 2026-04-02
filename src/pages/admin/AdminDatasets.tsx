@@ -136,9 +136,6 @@ const AdminDatasets = () => {
             ) : (
               filtered.map((ds) => (
                 <TableRow key={ds.id} className="group hover:bg-muted/20 transition-colors">
-                  <TableCell>
-                    <code className="text-xs bg-muted px-2 py-1 rounded">{ds.id}</code>
-                  </TableCell>
                   <TableCell className="font-medium flex items-center gap-2">
                     <Database className="h-4 w-4 text-muted-foreground" />
                     {ds.name}
