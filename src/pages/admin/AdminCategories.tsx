@@ -208,9 +208,6 @@ const AdminCategories = () => {
                       <CategoryIconPreview name={cat.icon} className="h-5 w-5" />
                     </div>
                   </TableCell>
-                  <TableCell>
-                    <code className="text-xs bg-muted px-2 py-1 rounded">{cat.id}</code>
-                  </TableCell>
                   <TableCell className="font-medium">{cat.name}</TableCell>
                   <TableCell className="text-sm text-muted-foreground">{cat.slug}</TableCell>
                   <TableCell>
