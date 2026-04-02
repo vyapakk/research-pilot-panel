@@ -118,7 +118,7 @@ const AdminDatasets = () => {
         <Table>
           <TableHeader>
             <TableRow className="bg-muted/30">
-              <TableHead className="font-semibold" style={{ color: "#1b4263" }}>ID</TableHead>
+              
               <TableHead className="font-semibold" style={{ color: "#1b4263" }}>Dataset Name</TableHead>
               <TableHead className="font-semibold" style={{ color: "#1b4263" }}>Slug</TableHead>
               <TableHead className="font-semibold" style={{ color: "#1b4263" }}>Category</TableHead>
