@@ -5,6 +5,7 @@ import {
   FolderTree,
   FileText,
   Shield,
+  Bell,
   CreditCard,
   BarChart3,
   LogOut,
