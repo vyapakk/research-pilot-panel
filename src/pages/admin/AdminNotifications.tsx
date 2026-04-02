@@ -265,11 +265,12 @@ const AdminNotifications = () => {
                     <SelectValue />
                   </SelectTrigger>
                   <SelectContent>
-                    <SelectItem value="all">All Users</SelectItem>
+                     <SelectItem value="all">All Users</SelectItem>
                     <SelectItem value="individual">Individual User(s)</SelectItem>
                     <SelectItem value="industry">By Industry</SelectItem>
                     <SelectItem value="company">By Company</SelectItem>
                     <SelectItem value="access">By Category / Access</SelectItem>
+                    <SelectItem value="dataset">By Dataset</SelectItem>
                   </SelectContent>
                 </Select>
               </div>
