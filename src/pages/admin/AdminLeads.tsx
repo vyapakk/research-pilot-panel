@@ -78,8 +78,21 @@ const AdminLeads = () => {
   const paginated = filtered.slice((currentPage - 1) * ITEMS_PER_PAGE, currentPage * ITEMS_PER_PAGE);
 
   const handleExportCSV = () => {
+    let exportData = filtered;
+    if (exportFrom) {
+      exportData = exportData.filter((l) => new Date(l.submittedAt) >= exportFrom);
+    }
+    if (exportTo) {
+      const toEnd = new Date(exportTo);
+      toEnd.setHours(23, 59, 59, 999);
+      exportData = exportData.filter((l) => new Date(l.submittedAt) <= toEnd);
+    }
+    if (exportData.length === 0) {
+      toast.error("No leads in the selected date range");
+      return;
+    }
     const headers = ["ID", "Type", "Name", "Email", "Phone", "Company", "Designation", "Dataset/Dashboard", "Message/Query", "Submitted At"];
-    const rows = filtered.map((l) => [
+    const rows = exportData.map((l) => [
       l.id,
       typeLabel[l.type],
       l.name,
@@ -99,7 +112,7 @@ const AdminLeads = () => {
     a.download = `leads_export_${new Date().toISOString().slice(0, 10)}.csv`;
     a.click();
     URL.revokeObjectURL(url);
-    toast.success(`Exported ${filtered.length} leads`);
+    toast.success(`Exported ${exportData.length} leads`);
   };
 
   return (
