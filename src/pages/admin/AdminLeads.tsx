@@ -249,6 +249,16 @@ const AdminLeads = () => {
             <SelectItem value="enquiry">Query Form</SelectItem>
           </SelectContent>
         </Select>
+        <Select value={statusFilter} onValueChange={(v) => { setStatusFilter(v); setCurrentPage(1); }}>
+          <SelectTrigger className="w-[180px]">
+            <SelectValue placeholder="All Status" />
+          </SelectTrigger>
+          <SelectContent>
+            <SelectItem value="all">All Status</SelectItem>
+            <SelectItem value="resolved">Resolved</SelectItem>
+            <SelectItem value="unresolved">Unresolved</SelectItem>
+          </SelectContent>
+        </Select>
       </div>
 
       {/* Table */}
