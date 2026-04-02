@@ -36,14 +36,14 @@ const AdminDashboards = () => {
   const [formDatasetId, setFormDatasetId] = useState("");
   const [datasetSearch, setDatasetSearch] = useState("");
 
-  const filtered = search
-    ? dashboards.filter(
-        (d) =>
-          d.name.toLowerCase().includes(search.toLowerCase()) ||
-          d.slug.toLowerCase().includes(search.toLowerCase()) ||
-          d.datasetName.toLowerCase().includes(search.toLowerCase())
-      )
-    : dashboards;
+  const filtered = dashboards.filter((d) => {
+    const matchesSearch = !search ||
+      d.name.toLowerCase().includes(search.toLowerCase()) ||
+      d.slug.toLowerCase().includes(search.toLowerCase()) ||
+      d.datasetName.toLowerCase().includes(search.toLowerCase());
+    const matchesDataset = datasetFilter === "all" || d.datasetId === datasetFilter;
+    return matchesSearch && matchesDataset;
+  });
 
   const filteredDatasets = datasetSearch
     ? datasets.filter((ds) =>
