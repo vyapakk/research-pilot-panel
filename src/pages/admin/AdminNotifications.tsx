@@ -98,6 +98,7 @@ const AdminNotifications = () => {
     setSelectedIndustries([]);
     setSelectedCompanies([]);
     setSelectedCategories([]);
+    setSelectedDatasets([]);
   };
 
   const getRecipientCount = (): number => {
