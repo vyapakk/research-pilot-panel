@@ -368,6 +368,7 @@ const UserDetailSheet = ({ user, onClose, onUserUpdate, onUserDelete }: UserDeta
                   </div>
                 )}
 
+                {grantType !== "master" && (
                 <div className="space-y-2">
                   <Label className="text-xs">Category</Label>
                   <Select value={selectedCategory} onValueChange={(v) => {
