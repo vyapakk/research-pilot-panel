@@ -92,7 +92,7 @@ const AdminLeads = () => {
       result = result.filter((l) => new Date(l.submittedAt) <= toEnd);
     }
     return result;
-  }, [leads, search, typeFilter, exportFrom, exportTo]);
+  }, [leads, search, typeFilter, statusFilter, exportFrom, exportTo]);
 
   const totalPages = Math.ceil(filtered.length / ITEMS_PER_PAGE);
   const paginated = filtered.slice((currentPage - 1) * ITEMS_PER_PAGE, currentPage * ITEMS_PER_PAGE);
