@@ -3,7 +3,7 @@
 // Notification types matching the base project's DashboardHeader notification types
 export type NotificationType = "update" | "alert" | "info";
 
-export type TargetAudience = "all" | "individual" | "industry" | "company" | "access";
+export type TargetAudience = "all" | "individual" | "industry" | "company" | "access" | "dataset";
 
 export interface AdminNotification {
   id: string;
