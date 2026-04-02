@@ -48,6 +48,8 @@ const AdminLeads = () => {
   const [typeFilter, setTypeFilter] = useState<string>("all");
   const [currentPage, setCurrentPage] = useState(1);
   const [selectedLead, setSelectedLead] = useState<AdminLead | null>(null);
+  const [exportFrom, setExportFrom] = useState<Date | undefined>();
+  const [exportTo, setExportTo] = useState<Date | undefined>();
 
   const filtered = useMemo(() => {
     let result = leads;
